@@ -8,15 +8,17 @@ use parent 'DynaLoader';
 
 sub dl_load_flags { 0x01 }
 
-__PACKAGE__->bootstrap(
-    # we need to be careful not to touch $VERSION at compile time, otherwise
-    # DynaLoader will assume it's set and check against it, which will cause
-    # fail when being run in the checkout without dzil having set the actual
-    # $VERSION
-    exists $smartmatch::engine::core::{VERSION}
-        ? ${ $smartmatch::engine::core::{VERSION} } : (),
-);
-smartmatch::engine::core::init(__PACKAGE__->can('match'));
+if (!$smartmatch::engine::core::USE_PP) {
+    __PACKAGE__->bootstrap(
+        # we need to be careful not to touch $VERSION at compile time,
+        # otherwise DynaLoader will assume it's set and check against it, which
+        # will cause fail when being run in the checkout without dzil having
+        # set the actual $VERSION
+        exists $smartmatch::engine::core::{VERSION}
+            ? ${ $smartmatch::engine::core::{VERSION} } : (),
+    );
+    smartmatch::engine::core::init(__PACKAGE__->can('match'));
+}
 
 use B;
 use Carp qw(croak);
