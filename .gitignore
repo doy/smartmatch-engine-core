@@ -9,4 +9,4 @@ nytprof.out
 MANIFEST.bak
 *.sw[po]
 .build
-smartmatch-*
+smartmatch-engine-core-*
