@@ -26,6 +26,25 @@ use Hash::Util::FieldHash qw(idhash);
 use Scalar::Util qw(blessed looks_like_number reftype);
 use overload ();
 
+=head1 SYNOPSIS
+
+  use smartmatch 'core';
+
+=head1 DESCRIPTION
+
+NOTE: This module is still experimental, and the API may change at any point.
+You have been warned!
+
+This module implements the existing smart matching algorithm from perl 5.14, as
+a module. It has a pure perl implementation of the algorithm (which can be
+requested by setting C<$smartmatch::engine::core::USE_PP> to a true value
+before C<use>ing this engine), but by default it uses a C implementation which
+should be identical to the algorithm in 5.14 - this module uses some new
+compiler hooks to turn calls to the engine's C<match> function into a custom
+opcode, which is implemented by a copy of the smart match code from perl 5.14.
+
+=cut
+
 sub type {
     my ($thing) = @_;
 
@@ -191,5 +210,57 @@ sub match {
         return $a eq $b;
     }
 }
+
+=head1 BUGS
+
+No known bugs.
+
+Please report any bugs through RT: email
+C<bug-smartmatch-engine-core at rt.cpan.org>, or browse to
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=smartmatch-engine-core>.
+
+=head1 SEE ALSO
+
+L<smartmatch>
+
+L<perlsyn/"Smart matching in detail">
+
+=head1 SUPPORT
+
+You can find this documentation for this module with the perldoc command.
+
+    perldoc smartmatch::engine::core
+
+You can also look for information at:
+
+=over 4
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/smartmatch-engine-core>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/smartmatch-engine-core>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=smartmatch-engine-core>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/smartmatch-engine-core>
+
+=back
+
+=begin Pod::Coverage
+
+type
+match
+init
+
+=end Pod::Coverage
+
+=cut
 
 1;
