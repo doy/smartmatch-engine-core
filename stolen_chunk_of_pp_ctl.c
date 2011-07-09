@@ -1,3 +1,6 @@
+#define NEED_sv_2pv_flags
+#include "ppport.h"
+
 /* embed.h */
 
 #define destroy_matcher(a)	S_destroy_matcher(aTHX_ a)
