@@ -18,9 +18,7 @@ $core_error =~ s/\d+/XXX/g;
     $engine_error =~ s/\d+/XXX/g;
     (my $short_engine_error = $engine_error) =~ s/ at .* line .*//;
     is($short_engine_error, $short_core_error);
-    { local $TODO = "Carp is dumb";
     is($engine_error, $core_error);
-    }
 }
 
 done_testing;
