@@ -17,7 +17,7 @@ if (!$smartmatch::engine::core::USE_PP) {
         exists $smartmatch::engine::core::{VERSION}
             ? ${ $smartmatch::engine::core::{VERSION} } : (),
     );
-    smartmatch::engine::core::init(__PACKAGE__->can('match'));
+    init(__PACKAGE__->can('match'));
 }
 
 use B;
