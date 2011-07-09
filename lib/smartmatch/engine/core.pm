@@ -189,6 +189,7 @@ sub match {
             return grep /$b/, @$a;
         }
         else {
+            no warnings 'uninitialized';
             return $a =~ $b;
         }
     }
