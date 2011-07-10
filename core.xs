@@ -6,6 +6,8 @@
 
 #include "stolen_chunk_of_pp_ctl.c"
 
+#include "callchecker0.h"
+
 STATIC OP*
 install_sm_op(pTHX_ OP *o, GV *gv, SV *ud)
 {
