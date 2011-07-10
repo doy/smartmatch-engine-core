@@ -51,7 +51,10 @@ sub type {
     if (!defined($thing)) {
         return 'undef';
     }
-    elsif (blessed($thing) && reftype($thing) ne 'REGEXP') {
+    elsif (re::is_regexp($thing)) {
+        return 'Regex';
+    }
+    elsif (blessed($thing)) {
         return 'Object';
     }
     elsif (my $reftype = reftype($thing)) {
@@ -60,9 +63,6 @@ sub type {
         }
         elsif ($reftype eq 'HASH') {
             return 'Hash';
-        }
-        elsif ($reftype eq 'REGEXP') {
-            return 'Regex';
         }
         elsif ($reftype eq 'CODE') {
             return 'CodeRef';
