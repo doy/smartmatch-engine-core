@@ -8,7 +8,7 @@ use parent 'DynaLoader';
 
 sub dl_load_flags { 0x01 }
 
-if (!$smartmatch::engine::core::USE_PP) {
+if (!$smartmatch::engine::core::USE_PP && $] >= 5.014) {
     __PACKAGE__->bootstrap(
         # we need to be careful not to touch $VERSION at compile time,
         # otherwise DynaLoader will assume it's set and check against it, which

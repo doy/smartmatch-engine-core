@@ -3,6 +3,11 @@ use strict;
 use warnings;
 use Test::More;
 
+BEGIN {
+    plan skip_all => "no c implementation for pre-5.14 for now"
+        if $] < 5.014;
+}
+
 my $foo = bless {};
 my $bar = bless {};
 
