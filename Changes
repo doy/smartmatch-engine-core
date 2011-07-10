@@ -1,6 +1,10 @@
 Revision history for smartmatch::engine::core
 
 {{$NEXT}}
+      - Use Devel::CallParser to get things working on 5.12, and disable the xs
+        bits entirely on 5.10 (but make it work with the pure perl version at
+        least)
+      - A couple tweaks to the perl implementation
 
 0.01  2011-07-08
       - Initial release
