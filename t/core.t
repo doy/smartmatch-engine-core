@@ -3,6 +3,10 @@ use strict;
 use warnings;
 use Test::More;
 
+BEGIN {
+    plan skip_all => "xs version requires 5.11.2" unless $] >= 5.011002;
+}
+
 use smartmatch 'core';
 
 no warnings 'uninitialized';

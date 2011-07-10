@@ -11,17 +11,21 @@ override _build_MakeFile_PL_template => sub {
     my $depends = <<'END';
 %WriteMakefileArgs = (
     %WriteMakefileArgs,
-    Devel::CallChecker::callchecker_linkable,
+    ($] >= 5.011002
+        ? (Devel::CallChecker::callchecker_linkable)
+        : (C => [], XS => {})),
 );
 END
 
     $tmpl =~ s/(use ExtUtils.*)/$1\nuse Devel::CallChecker;/;
     $tmpl =~ s/(WriteMakefile\()/$depends\n$1/;
     $tmpl .= <<'END';
-open my $header, '>', 'callchecker0.h'
-    or die "Couldn't open callchecker0.h for writing: $!";
-print $header Devel::CallChecker::callchecker0_h;
-close $header;
+if ($] >= 5.011002) {
+    open my $header, '>', 'callchecker0.h'
+        or die "Couldn't open callchecker0.h for writing: $!";
+    print $header Devel::CallChecker::callchecker0_h;
+    close $header;
+}
 END
 
     return $tmpl;
